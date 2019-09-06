@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  vault:
+    image: vault
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - 8200:8200
+    environment:
+      - VAULT_DEV_ROOT_TOKEN_ID=xDNq4P1jJYF9Gm60GekUh8TW
+    command: server -dev
+
+  vaultproxy:
+    image: openresty/openresty:xenial
+    ports:
+      - 8089:80    
+    volumes:
+      - "./nginx.conf:/etc/nginx/conf.d/default.conf"
+      - "./vault-decode.lua:/etc/nginx/conf.d/lua/vault-decode.lua"
