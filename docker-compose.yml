@@ -7,9 +7,7 @@ services:
       - IPC_LOCK
     ports:
       - 8200:8200
-    environment:
-      - VAULT_DEV_ROOT_TOKEN_ID=xDNq4P1jJYF9Gm60GekUh8TW
-    command: server -dev
+    command: server -dev -dev-listen-address=0.0.0.0:8200 -dev-root-token-id="xDNq4P1jJYF9Gm60GekUh8TW"
 
   vaultproxy:
     image: openresty/openresty:xenial
